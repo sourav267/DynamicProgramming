@@ -1,0 +1,16 @@
+def knapSackREC(capacity, wt, val, n):
+    if capacity == 0 or n == 0:
+        return 0
+    elif wt[n - 1] > capacity:
+        return knapSackREC(capacity, wt, val, n - 1)
+    else:
+        return max(knapSackREC(capacity, wt, val, n - 1),
+                   val[n - 1] + knapSackREC(capacity - wt[n - 1], wt, val, n - 1))
+
+
+if __name__ == "__main__":
+    wt = [10, 20, 30]
+    val = [60, 100, 120]
+    n = len(val)
+    capacity = 50
+    print(knapSackREC(capacity, wt, val, n))

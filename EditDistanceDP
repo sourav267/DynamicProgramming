@@ -1,0 +1,23 @@
+def editDistance(str1, str2, m, n):
+    ed_table = [[0 for j in range(n+1)] for i in range(m + 1)]
+    for i in range(m + 1):
+        for j in range(n + 1):
+            if i == 0:
+                ed_table[i][j] = j
+            elif j == 0:
+                ed_table[i][j] = i
+            elif str1[i - 1] == str2[j - 1]:
+                ed_table[i][j] = ed_table[i - 1][j - 1]
+            else:
+                ed_table[i][j] = 1 + min(ed_table[i][j - 1], ed_table[i - 1][j], ed_table[i - 1][j - 1])
+
+    # print(ed_table)
+    return ed_table[m][n]
+
+
+if __name__ == "__main__":
+    str1 = "sunday"
+    str2 = "saturday"
+    m = len(str1)
+    n = len(str2)
+    print(editDistance(str1, str2, m, n))
